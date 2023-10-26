@@ -17,7 +17,9 @@ The repository introduces **GlotLID**, an open-source language identification mo
 
 ## How to use
 
-You can use the model directly with fasttext library:
+### Language Identification (Python)
+
+You can use the model directly with fasttext library to predict language label:
 
 ```python
 ! pip install fasttext
@@ -28,18 +30,43 @@ You can use the model directly with fasttext library:
 import fasttext
 from huggingface_hub import hf_hub_download
 
-# Download model
-## cache_dir: Path to the folder where the downloaded model will be stored/cached.
+# download model
+## cache_dir: path to the folder where the downloaded model will be stored/cached.
 model_path = hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin", cache_dir=None)
 
-# Load the model
+# load the model
 model = fasttext.load_model(model_path)
 
-# Predict using the model (call this function as many times as needed)
+# predict language label (call this function as many times as needed)
 model.predict("Hello, world!")
 ```
 
-## Data Sources
+### Sentence Vectors (Python)
+
+You can also use the model with fasttext library to get sentence vectors:
+
+```python
+! pip install fasttext
+! pip install huggingface_hub
+```
+
+```python
+import fasttext
+from huggingface_hub import hf_hub_download
+
+# download model
+## cache_dir: path to the folder where the downloaded model will be stored/cached.
+model_path = hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin", cache_dir=None)
+
+# load the model
+model = fasttext.load_model(model_path)
+
+# get sentence vector of input sentence (call this function as many times as needed)
+embedding = model.get_sentence_vector(sent)
+```
+
+
+## Data Sources 
 
 See list of data sources [here](./sources.md).
 
