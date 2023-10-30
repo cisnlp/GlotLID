@@ -70,6 +70,9 @@ embedding = model.get_sentence_vector(sent)
 
 See list of data sources [here](./sources.md).
 
+You're welcome to open a [pull request](https://github.com/cisnlp/GlotLID/pulls) or ([issue](https://github.com/cisnlp/GlotLID/issues)) and contribute new resources to our data list. Even for the languages we already support, we're actively seeking additional resources to mitigate domain shift issues.
+
+
 ## Benchmark 
 
 - UDHR: access our clean version of udhr [here](https://huggingface.co/datasets/cis-lmu/udhr-lid).
@@ -78,6 +81,20 @@ See list of data sources [here](./sources.md).
 ## Evaluation
 
 Codes will be uploaded soon.
+
+## FAQ
+- If you see wrong predicted tags by GlotLID for a normal long text open an [issue](https://github.com/cisnlp/GlotLID/issues), however:
+  - if the script is not supported by our model then use [GlotScript](https://github.com/cisnlp/GlotLID) to verify for the predicted `lang_script`, script in the sentence exists!  Otherwise, you need to write a function that returns 'und_mainscript' in this situations. GlotScript can identify both the mainscript and all available scripts in the sentence. We recommend using GlotLID in conjunction with GlotScript.
+  - The high confidence threshold for each language could be different. This is because not all languages have the same distance from each other. For one language, 0.6 is a lot because it is very close to a similar language (such as dyu and bam), while for another, 0.9 might not be. 
+  - This model is primarily trained on longer sentences, avoid using it on very short sentences. Other language identification models are not good at short sentences as well unless you increase the ngram size, which is computationally expensive.
+  -  In GlotLID, the false positive rate (FPR) for high-resource languages is much higher than for low-resource languages. However, even with this higher FPR, it is still lower than in a situation where the language identification model only recognizes high-resource languages. We are also okay with this situation since our main concern is for the FPR of low-resource languages to be low. The high-resource base frequency is much higher than for low-resource languages, so cleanliness would not be a threat for those languages. However, for a low-resource language with a low base frequency, even a small FPR might result in most of the corpus being noisy.
+
+- If you want to add a language, provide the resource in an open [issue](https://github.com/cisnlp/GlotLID/issues), and we will add it. If you require the model urgently, we can expedite the process in less than a week (the training itself takes less than a day). However, if there's no immediate urgency, that language will be included in the official release according to our schedule (depends on new resources).-
+- If you need a custmoized model with susbet of languages let us known in an open [issue](https://github.com/cisnlp/GlotLID/issues)
+- If you want to collaborate, please send us an email (to: amir@cis.lmu.de) specifying the type of collaboration you need from us.
+- for the rest of requests feel free to email or open an issue.
+
+
 
 ## Citation
 
