@@ -65,6 +65,21 @@ model = fasttext.load_model(model_path)
 embedding = model.get_sentence_vector(sent)
 ```
 
+## Versions
+
+We always maintain the previous version of GlotLID in our [huggingface](https://huggingface.co/cis-lmu/glotlid) repository.
+
+To access a specific version, simply append the version number to the filename.
+
+For v1: `model_v1.bin` (introduced in the GlotLID paper and used in all experiments).
+
+For v2: `model_v2.bin` (an edited version of v1, featuring more languages, and cleaned from noisy corpora based on the analysis of v1).
+- It suuports 1802 three-letter iso codes (1847 three letter iso codes with script)
+- For 1626 three-letter iso codes; v2 on the test set achieved F1 of 0.996 and FPR of 0.0002.
+  - These 1626 languages are selected based on the 0.5 F1 threshold and 0.0005 FPR threshold for low resource languages.
+
+`model.bin` always refers to the latest version (v2 now).
+
 
 ## Data Sources 
 
