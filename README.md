@@ -109,7 +109,9 @@ Codes will be uploaded soon.
 - If you want to collaborate, please send us an email (to: amir@cis.lmu.de) specifying the type of collaboration you need from us.
 - for the rest of requests feel free to email or open an issue.
 
+## Media Coverage
 
+See list of media coverage [here](./media.md).
 
 ## Citation
 
