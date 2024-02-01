@@ -50,4 +50,4 @@
 |Todo| QADI | ?, location tags can be converted to language tags. However, we cannot deny the existence of such a resource, even if some level of noise exists. Arabic dialects are close to each other, and even news websites might be written in standard Arabic.  | Tweets | [QADI Tweet IDs](https://github.com/qcri/QADI) | Apache License 2.0
 |Todo| Mot          | Yes          | VOA News            | [mot](https://github.com/bltlab/mot)    | MIT License              |
 |Todo| gov-za | Yes | government domain | [gov-za-monolingual](https://huggingface.co/datasets/dsfsi/gov-za-monolingual)| License for Data - CC BY 4.0 |
-|Todo| NusaT and NusaP| Yes | Human Translation | [indonlp](https://huggingface.co/indonlp), [nusa-writes](https://github.com/IndoNLP/nusa-writes/) | CC-BY-SA 4.0 or Apache License 2.0 |
+|Todo| NusaT, NusaP, NusaX | Yes | Human Translation | [indonlp](https://huggingface.co/indonlp), [nusa-writes](https://github.com/IndoNLP/nusa-writes/), [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) | CC-BY-SA 4.0 or Apache License 2.0 |
