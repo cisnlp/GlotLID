@@ -14,12 +14,16 @@
 
 The repository introduces **GlotLID**, an open-source language identification model with support for more than **1600 languages**.
 
+## Features
+- Language Identification
+- Get Sentence Vectors in respect to many languages
+- Limit the language identification model to a smaller set of languages (**new feature**)
+
 
 ## How to use
 
-### Language Identification (Python)
+### Load the model (Python)
 
-You can use the model directly with fasttext library to predict language label:
 
 ```python
 ! pip install fasttext
@@ -36,34 +40,126 @@ model_path = hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin", ca
 
 # load the model
 model = fasttext.load_model(model_path)
+```
 
+Now you can use it for differnet applications:
+
+#### For Language Identification :
+
+```python
+"""Language Identification"""
 # predict language label (call this function as many times as needed)
 model.predict("Hello, world!")
 ```
 
-### Sentence Vectors (Python)
+If you need top k prediction then, for example k = 3:
+```
+model.predict("Hello, world!", 3)
+```
 
-You can also use the model with fasttext library to get sentence vectors:
+#### For getting sentence vectors:
 
 ```python
-! pip install fasttext
-! pip install huggingface_hub
+"""Sentence Vectors"""
+# get sentence vector of input sentence (call this function as many times as needed)
+embedding = model.get_sentence_vector(sent)
 ```
+
+### Limit the model to a smaller set of languages (Python)
+
+You do not need to train another model for this. Just limit the prediction to the set you want. You can do it in two ways: `after` the prediction over all available classes, limit to those you want, or `before` the prediction, first limit to those you want, and then predict. If you want your probability to also be normalized to the set you specify, choose the `before` mode (default). However, if you want the probability you have to be in respect to all languages and then become limited to the set you have chosen, use the `after` mode.
+
+You can find how we to do this in [customlid.py](./assets/customlid.py).
+
+<details>
+<summary>Or click to see the code here.</summary>
+
 
 ```python
 import fasttext
+import numpy as np
+class CustomLID:
+    def __init__(self, model_path, languages = -1, mode='before'):
+        self.model = fasttext.load_model(model_path)
+        self.output_matrix = self.model.get_output_matrix()
+        self.labels = self.model.get_labels()
+        
+        # compute language_indices
+        if languages !=-1 and isinstance(languages, list):
+            self.language_indices = [self.labels.index(l) for l in list(set(languages)) if l in self.labels]
+
+        else:
+            self.language_indices = list(range(len(self.labels)))
+
+        # limit labels to language_indices
+        self.labels = list(np.array(self.labels)[self.language_indices])
+        
+        # predict
+        self.predict = self.predict_limit_after_softmax if mode=='after' else self.predict_limit_before_softmax
+
+    
+    def predict_limit_before_softmax(self, text, k=1):
+        
+        # sentence vector
+        sentence_vector = self.model.get_sentence_vector(text)
+        
+        # dot
+        result_vector = np.dot(self.output_matrix[self.language_indices, :], sentence_vector)
+
+        # softmax
+        softmax_result = np.exp(result_vector - np.max(result_vector)) / np.sum(np.exp(result_vector - np.max(result_vector)))
+
+        # top k predictions
+        top_k_indices = np.argsort(softmax_result)[-k:][::-1]
+        top_k_labels = [self.labels[i] for i in top_k_indices]
+        top_k_probs = softmax_result[top_k_indices]
+
+        return tuple(top_k_labels), top_k_probs
+
+
+    def predict_limit_after_softmax(self, text, k=1):
+        
+        # sentence vector
+        sentence_vector = self.model.get_sentence_vector(text)
+        
+        # dot
+        result_vector = np.dot(self.output_matrix, sentence_vector)
+
+        # softmax
+        softmax_result = np.exp(result_vector - np.max(result_vector)) / np.sum(np.exp(result_vector - np.max(result_vector)))
+
+        # limit softmax to language_indices
+        softmax_result = softmax_result[self.language_indices]
+
+        
+        # top k predictions
+        top_k_indices = np.argsort(softmax_result)[-k:][::-1]
+        top_k_labels = [self.labels[i] for i in top_k_indices]
+        top_k_probs = softmax_result[top_k_indices]
+
+        return tuple(top_k_labels), top_k_probs
+
+```
+
+You can load the model with CustomLID class to limit your prediction to the set of limited_languages:
+
+```python
 from huggingface_hub import hf_hub_download
 
 # download model
 ## cache_dir: path to the folder where the downloaded model will be stored/cached.
 model_path = hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin", cache_dir=None)
 
-# load the model
-model = fasttext.load_model(model_path)
 
-# get sentence vector of input sentence (call this function as many times as needed)
-embedding = model.get_sentence_vector(sent)
+# to make sure these languages are available in GlotLID check the list of supported labels in model.labels
+limited_languages = ['__label__eng_Latn', '__label__arb_Arab', '__label__rus_Cyrl', '__label__por_Latn', '__label__pol_Latn', '__label__hin_Deva']
+
+model = CustomLID(model_path, languages = limited_languages , mode='before')
+
+model.predict("Hello, world!", 3)
 ```
+
+</details>
 
 ## Versions
 
@@ -102,17 +198,13 @@ You can find how we compute F1, Recall, Precision, and FPR in [metrics.py](./ass
 - If you see wrong predicted tags by GlotLID for a normal long text open an [issue](https://github.com/cisnlp/GlotLID/issues), however:
   - if the script is not supported by our model then use [GlotScript](https://github.com/cisnlp/GlotLID) to verify for the predicted `lang_script`, script in the sentence exists!  Otherwise, you need to write a function that returns 'und_mainscript' in this situations. GlotScript can identify both the mainscript and all available scripts in the sentence. We recommend using GlotLID in conjunction with GlotScript.
   - The high confidence threshold for each language could be different. This is because not all languages have the same distance from each other. For one language, 0.6 is a lot because it is very close to a similar language (such as dyu and bam), while for another, 0.9 might not be. 
-  - This model is primarily trained on longer sentences, avoid using it on very short sentences. Other language identification models are not good at short sentences as well unless you increase the ngram size, which is computationally expensive.
+  - This model is primarily trained on longer sentences, avoid using it on very short sentences. Other language identification models are not good at short sentences as well unless you increase the ngram size (in training), which is computationally expensive.
   -  In GlotLID, the false positive rate (FPR) for high-resource languages is much higher than for low-resource languages. However, even with this higher FPR, it is still lower than in a situation where the language identification model only recognizes high-resource languages. We are also okay with this situation since our main concern is for the FPR of low-resource languages to be low. The high-resource base frequency is much higher than for low-resource languages, so cleanliness would not be a threat for those languages. However, for a low-resource language with a low base frequency, even a small FPR might result in most of the corpus being noisy.
-
+- Don't forget, you don't always need to run the language identification model in full. If you have a setup where you know it can only be a set of specific languages, then limit the prediction to those. We have provided the code for limiting it in this readme.
 - If you want to add a language, provide the resource in an open [issue](https://github.com/cisnlp/GlotLID/issues), and we will add it. If you require the model urgently, we can expedite the process in less than a week (the training itself takes less than a day). However, if there's no immediate urgency, that language will be included in the official release according to our schedule (depends on new resources).-
 - If you need a custmoized model with susbet of languages let us known in an open [issue](https://github.com/cisnlp/GlotLID/issues)
 - If you want to collaborate, please send us an email (to: amir@cis.lmu.de) specifying the type of collaboration you need from us.
 - for the rest of requests feel free to email or open an issue.
-
-## Media Coverage
-
-See list of media coverage [here](./media.md).
 
 ## Citation
 
