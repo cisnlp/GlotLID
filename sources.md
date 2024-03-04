@@ -22,7 +22,7 @@
 |Yes, (V1,V2)| HKCanCor	  | Yes | Transcribed conversations | [hkcancor](https://github.com/fcbond/hkcancor) | CC BY 4.0| 
 | Yes, (V2) | ai4d challenge (Nyanja) | Yes | News | [ai4d-malawi-news](https://zindi.africa/competitions/ai4d-malawi-news-classification-challenge/data) | No explicit license | 
 | Yes, (V2) | Wanca 2016 | ? | Web | [wanca2016](https://www.kielipankki.fi/corpora/wanca2016/) | CC - BY | 
-| Yes, (V2) | smugri | Yes | News | [smugri-data](https://huggingface.co/datasets/tartuNLP/smugri-data) | CC BY 4.0  | 
+| Delete, (V2) | smugri | No, after training V2 model we find this data is not clean | News | [smugri-data](https://huggingface.co/datasets/tartuNLP/smugri-data) | CC BY 4.0  | 
 | Yes, (V2) | finno-ugric  | ? | ? | [finno-ugric-train](https://huggingface.co/datasets/tartuNLP/finno-ugric-train) | CC BY 4.0 | 
 | Yes, (V2) | smugri-flores  | Yes | Human Translation | [smugri-flores-testset](https://huggingface.co/datasets/tartuNLP/smugri-flores-testset) | CC BY 4.0 | 
 | Yes, (V2) | Abkhaz National Corpus | Yes | grammatically annotated text (linguistics, literary studies, history, political and social sciences) | [Abkhaz National Corpus](https://clarino.uib.no/abnc/page), [abkhaz_text](https://huggingface.co/datasets/Nart/abkhaz_text) | Public domain (cc0-1.0) | 
@@ -51,3 +51,11 @@
 |Todo| Mot          | Yes          | VOA News            | [mot](https://github.com/bltlab/mot)    | MIT License              |
 |Todo| gov-za | Yes | government domain | [gov-za-monolingual](https://huggingface.co/datasets/dsfsi/gov-za-monolingual)| License for Data - CC BY 4.0 |
 |Todo| NusaT, NusaP, NusaX | Yes | Human Translation | [indonlp](https://huggingface.co/indonlp), [nusa-writes](https://github.com/IndoNLP/nusa-writes/), [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) | CC-BY-SA 4.0 or Apache License 2.0 |
+|Todo| MT Shared Task American NLP |  |  | [americasnlp2024](https://github.com/AmericasNLP/americasnlp2024/tree/master/ST1_MachineTranslation) |  |
+|Todo| ShaShiYaYi |  |  | [multilingual-data-peru](https://github.com/iapucp/multilingual-data-peru/tree/master) |  |
+|Todo| Hinglish collection |  |  | [english-to-hinglish](https://huggingface.co/datasets/findnitai/english-to-hinglish) |  |
+|Todo| Indic corpora |  |  | [In22Conv](https://huggingface.co/datasets/ai4bharat/IN22-Conv), [In22Gen](https://huggingface.co/datasets/ai4bharat/IN22-Gen) | CC-BY-SA 4.0 |
+|Todo| Yue parallel text |  |  | [yue-cmn-eng](https://huggingface.co/datasets/AlienKevin/yue-cmn-eng)  | |
+|Todo| Dakshina |  |  | [dakshina](https://github.com/google-research-datasets/dakshina)  | |
+|Todo| Bhasha-Abhijnaanam  | | | [Bhasha-Abhijnaanam](https://huggingface.co/datasets/ai4bharat/Bhasha-Abhijnaanam)  | |
+
