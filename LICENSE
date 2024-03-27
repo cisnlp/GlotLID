@@ -1,3 +1,45 @@
+Apache License 2.0 plus notices
+
+### Additional Notice on Training Data and Model Behavior
+
+This software includes a machine learning model for language identification
+based on statistical representations (e.g., character n-grams and linear classification).
+
+The model was trained on a mixture of publicly available data sources, which may
+include materials subject to copyright or other rights.
+
+The model does not store or encode expressive text content. Instead, it represents
+aggregated statistical patterns (such as n-gram frequency weights) that are not
+intended to reproduce original source material.
+
+No training data is included or distributed with this software.
+
+Due to its design, this model performs classification only and is not capable of
+generating or reconstructing source texts.
+
+### Good-Faith Notice
+
+If you are a rights holder and believe that your content has been included in the
+training data and wish to request its exclusion from future versions, please contact
+the authors. Reasonable efforts will be made to review and address such requests.
+
+### Limitation and Responsibility
+
+No representation or warranty is made regarding the licensing status of the
+underlying training data.
+
+Users are solely responsible for ensuring that their use of this software complies
+with applicable laws and licensing requirements.
+
+### Disclaimer
+
+Unless required by applicable law or agreed to in writing, this software is
+provided "AS IS", WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied, including, without limitation, any warranties of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+
+### Full Apache License Text
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
