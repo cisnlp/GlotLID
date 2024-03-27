@@ -95,7 +95,8 @@ You're welcome to open a [pull request](https://github.com/cisnlp/GlotLID/pulls)
 
 ## Evaluation
 
-Codes will be uploaded soon.
+You can find how we compute F1, Recall, Precision, and FPR in [metrics.py](./assets/metrics.py).
+
 
 ## FAQ
 - If you see wrong predicted tags by GlotLID for a normal long text open an [issue](https://github.com/cisnlp/GlotLID/issues), however:
