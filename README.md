@@ -12,13 +12,14 @@
 
 ## TL;DR
 
-The repository introduces **GlotLID**, an open-source language identification model with support for more than **1600 languages**.
+The repository introduces GlotLID, an open-source language identification model with support for more than 1600 languages.
+
+**Latest:** GlotLID is now updated to **V3**. V3 supports **2114 labels** (three-letter ISO codes with script). For more details on the supported languages and performance, as well as significant changes from previous versions, please refer to [languages-v3.md](./languages-v3.md).
 
 ## Features
 - Language Identification
 - Get Sentence Vectors in respect to many languages
-- Limit the language identification model to a smaller set of languages (**new feature**)
-
+- Limit the language identification model to a smaller set of languages (**new feature**): The SET! evaluation part in the original paper.
 
 ## How to use
 
@@ -53,8 +54,15 @@ model.predict("Hello, world!")
 ```
 
 If you need top k prediction then, for example k = 3:
-```
+```python
 model.predict("Hello, world!", 3)
+```
+
+If you want to see which labels (language_scripts) are supported by the model, check the list of them by:
+
+```python
+model.labels
+# ['__label__eng_Latn', '__label__rus_Cyrl', '__label__arb_Arab', '__label__por_Latn', ...]
 ```
 
 #### For getting sentence vectors:
@@ -174,7 +182,12 @@ For v2: `model_v2.bin` (an edited version of v1, featuring more languages, and c
 - For 1626 three-letter iso codes; v2 on the test set achieved F1 of 0.996 and FPR of 0.0002.
   - These 1626 languages are selected based on the 0.5 F1 threshold and 0.0005 FPR threshold for low resource languages.
 
-`model.bin` always refers to the latest version (v2 now).
+For v3: `model_v3.bin` (an edited version of v2, featuring more languages, excluding macro languages, further cleaned from noisy corpora and incorrect metadata labels based on the analysis of v2, supporting "zxx" and "und" series labels).
+- It supports 1880 three-letter ISO codes (2114 three-letter ISO codes with script).
+- For more details on the supported languages and performance, significant changes from previous versions, refer to [languages-v3.md](./languages-v3.md).
+
+
+`model.bin` always refers to the latest version (v3 now).
 
 
 ## Data Sources 
@@ -210,7 +223,7 @@ You can find how we compute F1, Recall, Precision, and FPR in [metrics.py](./ass
 
 If you find our model, code and list of data sources useful for your research, please cite:
 
-```
+```python
 @inproceedings{
   kargaran2023glotlid,
   title={GlotLID: Language Identification for Low-Resource Languages},
