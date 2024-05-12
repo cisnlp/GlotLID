@@ -58,4 +58,4 @@
 |Yes, (V3)| Yue parallel text |  |  | [yue-cmn-eng](https://huggingface.co/datasets/AlienKevin/yue-cmn-eng)  | |
 |Todo| Dakshina |  |  | [dakshina](https://github.com/google-research-datasets/dakshina)  | |
 |Yes, (V3)| Bhasha-Abhijnaanam  | | | [Bhasha-Abhijnaanam](https://huggingface.co/datasets/ai4bharat/Bhasha-Abhijnaanam)  | |
-
+|Yes, (V3)| [Bloom Library](https://bloomlibrary.org/) | | | [bloom-lm](https://huggingface.co/datasets/sil-ai/bloom-lm)  | CC-BY-(NC?-ND?-SA?)-4.0 |
