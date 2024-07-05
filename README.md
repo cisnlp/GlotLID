@@ -79,10 +79,7 @@ embedding = model.get_sentence_vector(sent)
 
 You do not need to train another model for this. Just limit the prediction to the set you want. You can do it in two ways: `after` the prediction over all available classes, limit to those you want, or `before` the prediction, first limit to those you want, and then predict. If you want your probability to also be normalized to the set you specify, choose the `before` mode (default). However, if you want the probability you have to be in respect to all languages and then become limited to the set you have chosen, use the `after` mode.
 
-You can find how we to do this in [customlid.py](./assets/inference/customlid.py).
-
-<details>
-<summary>Or click to see the code here.</summary>
+You can find how we to do this in [customlid.py](./assets/inference/customlid.py):
 
 
 ```python
@@ -170,7 +167,6 @@ model = CustomLID(model_path, languages = limited_languages , mode='before')
 model.predict("Hello, world!", 3)
 ```
 
-</details>
 
 ## Versions
 
