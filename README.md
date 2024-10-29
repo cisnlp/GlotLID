@@ -5,6 +5,7 @@
 <p align="center">
 <a href="https://huggingface.co/cis-lmu/glotlid"><img alt="HuggingFace Model" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-8A2BE2"></a>
 <a href="https://huggingface.co/spaces/cis-lmu/glotlid-space"><img alt="HuggingFace Demo" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space (Demo)-orange"></a>
+<a href="https://huggingface.co/datasets/cis-lmu/glotlid-corpus"><img alt="HuggingFace Data" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-blue"></a>
 <a href="https://github.com/cisnlp/GlotLID/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/cisnlp/GlotLID?logoColor=blue"></a>
 <a href="."><img alt="GitHub stars" src="https://img.shields.io/github/stars/cisnlp/GlotLID"></a>
 <a href="https://arxiv.org/abs/2310.16248"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2310.16248-b31b1b.svg"></a>
@@ -192,6 +193,7 @@ For v3: `model_v3.bin` (an edited version of v2, featuring more languages, exclu
 ## Data Sources 
 
 See list of data sources [here](./sources.md).
+We made a version of the dataset available for research purposes, which can be requested for access: https://huggingface.co/datasets/cis-lmu/glotlid-corpus
 
 You're welcome to open a [pull request](https://github.com/cisnlp/GlotLID/pulls) or ([issue](https://github.com/cisnlp/GlotLID/issues)) and contribute new resources to our data list. Even for the languages we already support, we're actively seeking additional resources to mitigate domain shift issues.
 
