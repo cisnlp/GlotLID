@@ -80,8 +80,10 @@ embedding = model.get_sentence_vector(sent)
 
 You do not need to train another model for this. Just limit the prediction to the set you want. You can do it in two ways: `after` the prediction over all available classes, limit to those you want, or `before` the prediction, first limit to those you want, and then predict. If you want your probability to also be normalized to the set you specify, choose the `before` mode (default). However, if you want the probability you have to be in respect to all languages and then become limited to the set you have chosen, use the `after` mode.
 
-You can find how we to do this in [customlid.py](./assets/inference/customlid.py):
+You can find how we to do this in [customlid.py](./assets/inference/customlid.py).
 
+<details>
+  <summary>Click to see the CustomLID class code.</summary>
 
 ```python
 import fasttext
@@ -148,6 +150,8 @@ class CustomLID:
         return tuple(top_k_labels), top_k_probs
 
 ```
+
+</details>
 
 You can load the model with CustomLID class to limit your prediction to the set of limited_languages:
 
@@ -223,15 +227,14 @@ You can find how we compute F1, Recall, Precision, and FPR in [metrics.py](./ass
 
 If you find our model, code and list of data sources useful for your research, please cite:
 
-```python
+```
 @inproceedings{
-  kargaran2023glotlid,
-  title={GlotLID: Language Identification for Low-Resource Languages},
-  author={Kargaran, Amir Hossein and Imani, Ayyoob and Yvon, Fran{\c{c}}ois and Sch{\"u}tze, Hinrich},
-  booktitle={The 2023 Conference on Empirical Methods in Natural Language Processing},
-  year={2023},
-  url={https://openreview.net/forum?id=dl4e3EBz5j}
+    kargaran2023glotlid,
+    title={{G}lot{LID}: Language Identification for Low-Resource Languages},
+    author={Kargaran, Amir Hossein and Imani, Ayyoob and Yvon, Fran{\c{c}}ois and Sch{\"u}tze, Hinrich},
+    booktitle={The 2023 Conference on Empirical Methods in Natural Language Processing},
+    year={2023},
+    url={https://openreview.net/forum?id=dl4e3EBz5j}
 }
 ```
-
 
