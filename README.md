@@ -27,7 +27,7 @@
 ### Load the model (Python)
 
 ```python
-# pip install fasttext
+# pip install fasttext-numpy2-wheel  # For newer Python versions ≥ 3.10, install this instead of "fasttext"
 # pip install huggingface_hub
 
 import fasttext
