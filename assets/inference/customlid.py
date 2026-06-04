@@ -30,13 +30,19 @@ class CustomLID:
         # dot
         result_vector = np.dot(self.output_matrix[self.language_indices, :], sentence_vector)
 
+        # top k indices on probs
+        k = min(k, len(result_vector))
+        top_k_indices_unsorted = np.argpartition(result_vector, -k)[-k:]
+        top_k_indices = top_k_indices_unsorted[np.argsort(result_vector[top_k_indices_unsorted])[::-1]]
+
         # softmax
-        softmax_result = np.exp(result_vector - np.max(result_vector)) / np.sum(np.exp(result_vector - np.max(result_vector)))
+        max_logits = np.max(result_vector)
+        exp_logits = np.exp(result_vector - max_logits)
+        denominator = np.sum(exp_logits)
+        top_k_probs = exp_logits[top_k_indices] / denominator
 
         # top k predictions
-        top_k_indices = np.argsort(softmax_result)[-k:][::-1]
         top_k_labels = [self.labels[i] for i in top_k_indices]
-        top_k_probs = softmax_result[top_k_indices]
 
         return tuple(top_k_labels), top_k_probs
 
@@ -45,7 +51,7 @@ class CustomLID:
         
         # sentence vector
         sentence_vector = self.model.get_sentence_vector(text)
-        
+
         # dot
         result_vector = np.dot(self.output_matrix, sentence_vector)
 
@@ -55,14 +61,17 @@ class CustomLID:
         # limit softmax to language_indices
         softmax_result = softmax_result[self.language_indices]
 
-        
+        # top k indices on logits
+        k = min(k, len(softmax_result))
+        top_k_indices_unsorted = np.argpartition(softmax_result, -k)[-k:]
+        top_k_indices = top_k_indices_unsorted[np.argsort(softmax_result[top_k_indices_unsorted])[::-1]]
+
         # top k predictions
-        top_k_indices = np.argsort(softmax_result)[-k:][::-1]
         top_k_labels = [self.labels[i] for i in top_k_indices]
         top_k_probs = softmax_result[top_k_indices]
 
         return tuple(top_k_labels), top_k_probs
-
+    
 
 
 # download model
