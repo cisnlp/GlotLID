@@ -14,7 +14,7 @@
 
 **TL;DR**: The repository introduces **GlotLID**, an open-source language identification (LID) model with support for more than **2000 labels**.
 
-**Latest:** GlotLID **v4 alpha** (`model_v4_alpha.bin`) is out as a pre-release of the next version: 2056 labels, a smaller model (783 MB instead of 1.69 GB), trained with [fastText-turbo](https://github.com/CommonGlot/fastText-turbo). It is not final yet; its labels and scores may still change, so `model.bin` stays v3 for now. See [versions](#versions).
+**Latest:** GlotLID **v4 alpha** (`model_v4_alpha.bin`) is out as a pre-release of the next version: 2056 labels, a smaller model (783 MB instead of 1.69 GB), trained with [fastText-turbo](https://github.com/CommonGlot/fastText-turbo). It is not final yet; its labels and scores may still change, so `model.bin` stays v3 for now. See [versions](https://github.com/cisnlp/GlotLID#versions).
 
 **Stable:** GlotLID V3 supports 2102 labels (three-letter [ISO 639-3](https://iso639-3.sil.org/code_tables/639/data) codes with script). For more details on the supported languages and performance, as well as significant changes from previous versions, please refer to [languages-v3.md](./languages-v3.md).
 
@@ -45,7 +45,7 @@ model = fasttext.load_model(model_path)
 
 We recommend [fastText-turbo](https://github.com/CommonGlot/fastText-turbo) (`pip install fasttext-turbo`): it is a drop-in replacement for fastText (same `import fasttext`, same model files and API, prebuilt wheels) that predicts with GlotLID about 3 times faster than the original fastText in our tests (2.7x with v4 alpha, 3.4-4.3x with v3), with the same predictions. The original `fasttext` package (or `fasttext-numpy2-wheel`) works too.
 
-If you do not want to always get the latest model (`model.bin`) and prefer to fix the version you are using, use `model_v?.bin` for example `model_v3.bin` (`?` is the version: we have `1`, `2`, `3`), or `model_v4_alpha.bin` for the v4 pre-release. See [versions](./#versions) for more.
+If you do not want to always get the latest model (`model.bin`) and prefer to fix the version you are using, use `model_v?.bin` for example `model_v3.bin` (`?` is the version: we have `1`, `2`, `3`), or `model_v4_alpha.bin` for the v4 pre-release. See [versions](https://github.com/cisnlp/GlotLID#versions) for more.
 
 Now you can use it for different applications:
 
