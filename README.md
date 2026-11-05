@@ -14,9 +14,9 @@
 
 **TL;DR**: The repository introduces **GlotLID**, an open-source language identification (LID) model with support for more than **2000 labels**.
 
-**Latest:** GlotLID **v4 alpha** (`model_v4_alpha.bin`) is out as a pre-release of the next version: 2056 labels, a smaller model (783 MB instead of 1.69 GB), trained with [fastText-turbo](https://github.com/CommonGlot/fastText-turbo). It is not final yet; its labels and scores may still change, so `model.bin` stays v3 for now. See [versions](https://github.com/cisnlp/GlotLID#versions).
+**Stable:** GlotLID **v4** (`model.bin`, the same file as `model_v4.bin`) supports 2060 labels (1,900 [ISO 639-3](https://iso639-3.sil.org/code_tables/639/data) language codes with script, with the `zxx` and `und` series). **GlotLID v4 small** (`model_v4_small.bin`) has the same labels and is about 4 times faster. For the supported languages, performance and the changes from v3, see [languages-v4.md](./languages-v4.md).
 
-**Stable:** GlotLID V3 supports 2102 labels (three-letter [ISO 639-3](https://iso639-3.sil.org/code_tables/639/data) codes with script). For more details on the supported languages and performance, as well as significant changes from previous versions, please refer to [languages-v3.md](./languages-v3.md).
+**Previous:** GlotLID v3 (`model_v3.bin`) supports 2102 labels; see [languages-v3.md](./languages-v3.md).
 
 ## Features
 - Language Identification
@@ -43,9 +43,9 @@ print("model path:", model_path)
 model = fasttext.load_model(model_path)
 ```
 
-We recommend [fastText-turbo](https://github.com/CommonGlot/fastText-turbo) (`pip install fasttext-turbo`): it is a drop-in replacement for fastText (same `import fasttext`, same model files and API, prebuilt wheels) that predicts with GlotLID about 3 times faster than the original fastText in our tests (2.7x with v4 alpha, 3.4-4.3x with v3), with the same predictions. The original `fasttext` package (or `fasttext-numpy2-wheel`) works too.
+We recommend [fastText-turbo](https://github.com/CommonGlot/fastText-turbo) (`pip install fasttext-turbo`): it is a drop-in replacement for fastText (same `import fasttext`, same model files and API, prebuilt wheels) that predicts with GlotLID about 3 times faster than the original fastText in our tests (2.7x with v4, 3.4-4.3x with v3), with the same predictions. The original `fasttext` package (or `fasttext-numpy2-wheel`) works too.
 
-If you do not want to always get the latest model (`model.bin`) and prefer to fix the version you are using, use `model_v?.bin` for example `model_v3.bin` (`?` is the version: we have `1`, `2`, `3`), or `model_v4_alpha.bin` for the v4 pre-release. See [versions](https://github.com/cisnlp/GlotLID#versions) for more.
+If you do not want to always get the latest model (`model.bin`) and prefer to fix the version you are using, use `model_v?.bin` for example `model_v4.bin` (`?` is the version: we have `1`, `2`, `3`, `4`), or `model_v4_small.bin` for the faster small model. See [versions](https://github.com/cisnlp/GlotLID#versions) for more.
 
 Now you can use it for different applications:
 
@@ -128,11 +128,14 @@ For v3: `model_v3.bin` (an edited version of v2, featuring more languages, exclu
 - For more details on the supported languages and performance, significant changes from previous versions, refer to [languages-v3.md](./languages-v3.md).
 
 
-For v4 alpha: `model_v4_alpha.bin` (a pre-release of v4; not final, its labels and scores may still change).
-- It supports 2056 labels (1899 three-letter ISO codes, with the `zxx` and `und` series).
+For v4: `model_v4.bin` (an edited version of v3: labels kept only where they work on independent benchmarks, so some v3 labels were merged or removed, further cleaned corpora, and trained on random short spans and normalized lines, which makes it markedly better on short text and calibrated).
+- It supports 2060 labels (1,900 three-letter ISO codes, with the `zxx` and `und` series). `model_v4.ftz` is its quantized version (101 MB; the same top label for 99.8% of lines).
 - Trained with [fastText-turbo](https://github.com/CommonGlot/fastText-turbo); it loads in fastText and fastText-turbo like the previous versions. It is smaller (96-dimensional, 783 MB) and uses character n-grams of 2 to 5 with word n-grams of 1, so nothing is shared between neighbouring words: the scores of a text add up from the scores of its words, which makes the per-word scores that [MaskLID](https://github.com/cisnlp/MaskLID) uses for code-switching exact.
+- For more details on the supported languages and performance, and the changes from v3, refer to [languages-v4.md](./languages-v4.md).
 
-`model.bin` always refers to the latest stable version (v3 now).
+For v4 small: `model_v4_small.bin` (the same 2060 labels in a 16-dimensional model with hierarchical softmax, 131 MB). It predicts about 4 times faster than v4 on one CPU thread, and is less accurate than v4, mostly between closely related languages. `model_v4_small.ftz` is its quantized version (35 MB).
+
+`model.bin` always refers to the latest stable version (v4 now).
 
 
 ## Data Sources 
