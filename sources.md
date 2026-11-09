@@ -69,3 +69,4 @@
 | Yes, (V4) | BeitTigreAI Tigre Monolingual Text | `tigrebeit` | Yes | News, narrative | [HF\_tigre-data-monolingual-text](https://huggingface.co/datasets/BeitTigreAI/tigre-data-monolingual-text) | CC BY 4.0 |
 | Yes, (V4) | BeitTigreAI Tigre Parallel Corpus (Tigre side) | `tigrebeitparallel` | Yes | Human Translation, Crowdsourcing | [HF\_tigre-data-parallel-multilingual](https://huggingface.co/datasets/BeitTigreAI/tigre-data-parallel-multilingual) | CC BY 4.0 (SMOL), CC BY 2.0 FR (Tatoeba), CC0 (community) |
 | Todo | Apertus Romansh Pre-training Subsample | `apertusrm` | Yes | Multiple domains | [HF\_apertus-pretrain-romansh-langid](https://huggingface.co/datasets/jvamvas/apertus-pretrain-romansh-langid) | CC BY 4.0 |
+| Todo | NOAH-Corpus in Swiss German (`gsw_Latn`) | `noahcorpus` | Yes | Multiple domains | [HF\_noah-corpus](https://huggingface.co/datasets/jvamvas/noah-corpus) | No explicit license
